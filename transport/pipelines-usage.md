@@ -68,7 +68,7 @@ The simulator pipeline stage could be added on either the client or server to si
 
 ### Use the simulator
 
-No further configuration is needed after configuring the pipline. It can be set up when the driver is created, as follows:
+No further configuration is needed after configuring the pipeline. It can be set up when the driver is created, as follows:
 
 ```csharp
 m_DriverHandle = NetworkDriver.Create(new SimulatorUtility.Parameters {MaxPacketSize = NetworkParameterConstants.MTU, MaxPacketCount = 30, PacketDelayMs = 25, PacketDropPercentage = 10});
@@ -120,7 +120,7 @@ The ack packet type is used when a certain amount of time has passed and nothing
 
 ### Use the reliability pipeline
 
-The following creates a pipeline with just the reliability pipeline stage present, and initialize it to a window size of 32 (so it can keep track of 32 reliable packets at a one time). The maximum value for this is 32.
+The following creates a pipeline with just the reliability pipeline stage present, and initialize it to a window size of 32 (so it can keep track of 32 reliable packets at a one time). The maximum value for this is 32. Note this is a 32 packet limit per connection, and you may create multiple pipelines.
 
 ```csharp
 m_ServerDriver = NetworkDriver.Create(new ReliableUtility.Parameters { WindowSize = 32 });
