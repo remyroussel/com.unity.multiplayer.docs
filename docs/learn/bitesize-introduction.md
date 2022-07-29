@@ -11,7 +11,7 @@ The Bitesize Samples repository provides a series of sample code as modules to u
 
 ## Requirements
 
-You need Unity and Unity MLAPI installed to work with these samples. See [Install  Netcode for GameObjects ](../migration/installation.md) for details.
+You need Unity and Netcode For GameObjects installed to work with these samples. See [Install  Netcode for GameObjects ](../migration/installation.md) for details.
 
 ## Get the samples
 
@@ -19,7 +19,7 @@ You need Unity and Unity MLAPI installed to work with these samples. See [Instal
 
 Download the project files from the [Bitesize Samples Repository](https://github.com/Unity-Technologies/com.unity.multiplayer.samples.bitesize)
 
-[how to download](/img/bitesize/bitesize-download.png)
+![how to download](/img/bitesize/bitesize-download.png)
 
 After download, unzip the archive file. You are now ready to add the project to Unity Hub.
 

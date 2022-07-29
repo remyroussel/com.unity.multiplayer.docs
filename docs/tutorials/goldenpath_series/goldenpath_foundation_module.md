@@ -9,7 +9,7 @@ In this tutorial we will build on the work we have already done in Hello World a
 
 ## Requirements
 
-This tutorial requires an  Netcode for GameObjects (Netcode)-supported version of Unity (2019.4+).
+This tutorial requires a Netcode for GameObjects (Netcode)-supported version of Unity (2020.3+).
 
 ## Create a new project in Unity
 
@@ -69,7 +69,7 @@ You should  now save the golden path foundation project as you will be building 
 For more information on the relevant concepts introduced here please refer to the following sections of the documentation:
 
 - [Network Manager](../../components/networkmanager.md)
-- [Transport](../advanced-topics/../../advanced-topics/custom-transports.md)
+- [Transport](../../advanced-topics/transports.md)
 - [Network Object](../../basics/networkobject.md)
 
 
