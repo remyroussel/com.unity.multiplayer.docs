@@ -11,36 +11,16 @@ module.exports = {
             "items": [
                 {
                     "type": "doc",
-                    "id": "migration/install"
+                    "id": "installation/install"
                 },
                 {
                     "type": "doc",
-                    "id": "migration/upgrade-guide",
+                    "id": "installation/upgrade_from_mlapi",
                 },
                 {
                     "type": "doc",
-                    "id": "migration/migratingtonetcode"
+                    "id": "installation/upgrade_from_UNet"
                 },
-                {
-                    "type": "doc",
-                    "id": "migration/migratingfrommlapi"
-                },
-                {
-                    "collapsed": true,
-                    "type": "category",
-                    "label": "Hello World",
-                    "items": [
-                        {
-                            "type": "doc",
-                            "id": "tutorials/helloworld/helloworldintro"
-                        },
-                        {
-                            "type": "doc",
-                            "id": "tutorials/helloworld/helloworldtwo"
-                        }
-                    ]
-                },
-
             ],
         },
         {
@@ -50,11 +30,11 @@ module.exports = {
             "items": [
                 {
                     "type": "doc",
-                    "id": "getting-started/connection-approval"
+                    "id": "basics/connection-approval"
                 },
                 {
                     "type": "doc",
-                    "id": "getting-started/max-players"
+                    "id": "basics/max-players"
                 },
                 {
                     "type": "doc",
@@ -340,12 +320,15 @@ module.exports = {
                 }
             ]
         },
-        
         {
             "collapsed": true,
             "type": "category",
             "label": "Walk-Throughs",
             "items": [
+                {
+                    "type": "doc",
+                    "id": "tutorials/helloworld"
+                },
                 {
                     "collapsed": true,
                     "type": "category",
@@ -353,11 +336,7 @@ module.exports = {
                     "items": [
                         {
                             "type": "doc",
-                            "id": "tutorials/goldenpath_series/starting_out"
-                        },
-                        {
-                            "type": "doc",
-                            "id": "tutorials/goldenpath_series/goldenpath_foundation_module"
+                            "id": "tutorials/goldenpath_series/gp_intro"
                         },
                         {
                             "type": "doc",
@@ -373,191 +352,170 @@ module.exports = {
 
             ]
         },
+        {
+            "collapsed": true,
+            "type": "category",
+            "label": "Educational Samples",
+            "items": [
+                {
+                    "collapsed": true,
+                    "type": "category",
+                    "label": "Boss Room",
+                    "items": [
+                        {
+                            "type": "doc",
+                            "id": "learn/bossroom/bossroom"
+                        },
+                        {
+                            "type": "doc",
+                            "id": "learn/bossroom/bossroom-actions"
+                        },
+                    ],
+                },
+                {
+                    "collapsed": true,
+                    "type": "category",
+                    "label": "Bitesize Samples",
+                    "items": [
+                        {
+                            "type": "doc",
+                            "id": "learn/bitesize/bitesize-introduction"
+                        },
+                        {
+                            "type": "doc",
+                            "id": "learn/bitesize/bitesize-invaders"
+                        },
+                        {
+                            "type": "doc",
+                            "id": "learn/bitesize/bitesize-spaceshooter"
+                        },
+                        {
+                            "type": "doc",
+                            "id": "learn/bitesize/bitesize-clientdriven"
+                        },
+                    ]
+                },
+            ],
+        },
+        {
+            "collapsed": true,
+            "type": "category",
+            "label": "Community Contributions",
+            "items": [
+                {
+
+                    "collapsed": true,
+                    "type": "category",
+                    "label": "Dilmer Tutorials",
+                    "items": [
+                        {
+                            "type": "doc",
+                            "id": "learn/dilmer/dilmer-video"
+                        },
+                        {
+                            "type": "doc",
+                            "id": "learn/dilmer/project-setup"
+                        },
+                        {
+                            "type": "doc",
+                            "id": "learn/dilmer/corefeatures"
+                        },
+                        {
+                            "type": "doc",
+                            "id": "learn/dilmer/networkanimator"
+                        },
+                        {
+                            "type": "doc",
+                            "id": "learn/dilmer/relay-service-setup"
+                        }
+                    ]
+                },
+                {
+
+                    "collapsed": true,
+                    "type": "category",
+                    "label": "Dapper Tutorials",
+                    "items": [
+                        {
+                            "type": "doc",
+                            "id": "learn/dapper/dapper-video"
+                        },
+                        {
+                            "type": "doc",
+                            "id": "learn/dapper/dapper-upgrade"
+                        },
+
+                    ]
+                }
+            ]
+        },
     ],
 
     Multiplayer:
         [
             {
                 "type": "doc",
-                "id": "learn/introduction",
+                "id": "reference/glossary/high-level-terminology"
             },
             {
                 "collapsed": true,
                 "type": "category",
-                "label": "Reference Material",
+                "label": "Lag",
                 "items": [
                     {
-                        "collapsed": true,
-                        "type": "category",
-                        "label": "Multiplayer Networking Concepts",
-                        "items": [
-                            {
-                                "type": "doc",
-                                "id": "reference/glossary/high-level-terminology"
-                            },
-                            {
-                                "collapsed": true,
-                                "type": "category",
-                                "label": "Lag",
-                                "items": [
-                                    {
-                                        "type": "doc",
-                                        "id": "reference/glossary/ticks-and-update-rates"
-                                    },
-                                    {
-                                        "type": "doc",
-                                        "id": "learn/lagandpacketloss"
-                                    },
-                                    {
-                                        "type": "doc",
-                                        "id": "learn/clientside_interpolation"
-                                    },
-                                    {
-                                        "type": "doc",
-                                        "id": "learn/dealing-with-latency"
-                                    },
-                                ],
-                            },
-
-                            {
-                                "type": "doc",
-                                "id": "reference/glossary/network-terms"
-                            },
-                            {
-                                "type": "doc",
-                                "id": "reference/glossary/prioritization"
-                            },
-                            {
-                                "type": "doc",
-                                "id": "reference/glossary/relevancy"
-                            },
+                        "type": "doc",
+                        "id": "reference/glossary/ticks-and-update-rates"
+                    },
+                    {
+                        "type": "doc",
+                        "id": "learn/lagandpacketloss"
+                    },
+                    {
+                        "type": "doc",
+                        "id": "learn/clientside_interpolation"
+                    },
+                    {
+                        "type": "doc",
+                        "id": "learn/dealing-with-latency"
+                    },
                         ],
-
-                    },
-                    {
-                        "collapsed": true,
-                        "type": "category",
-                        "label": "Multiplayer Game Architecture",
-                        "items": [
-                            {
-                                "type": "doc",
-                                "id": "learn/multiplayer-game-arhitecture"
-                            },
-                            {
-                                "type": "doc",
-                                "id": "reference/glossary/network-topologies"
-                            },
-
-                            {
-                                "type": "doc",
-                                "id": "learn/listen-server-host-architecture"
-                            }
-                        ]
-                    },
-
-
-                ],
+            },
+            {
+                "type": "doc",
+                "id": "reference/glossary/network-terms"
+            },
+            {
+                "type": "doc",
+                "id": "reference/glossary/prioritization"
+            },
+            {
+                "type": "doc",
+                "id": "reference/glossary/relevancy"
             },
             {
                 "collapsed": true,
                 "type": "category",
-                "label": "Educational Material",
+                "label": "Multiplayer Game Architecture",
                 "items": [
                     {
-                        "collapsed": true,
-                        "type": "category",
-                        "label": "Boss Room",
-                        "items": [
-                            {
-                                "type": "doc",
-                                "id": "learn/bossroom"
-                            },
-                            {
-                                "type": "doc",
-                                "id": "learn/bossroom-examples/bossroom-actions"
-                            },
-                        ],
+                        "type": "doc",
+                        "id": "learn/multiplayer-game-arhitecture"
                     },
                     {
-                        "collapsed": true,
-                        "type": "category",
-                        "label": "Bitesize Samples",
-                        "items": [
-                            {
-                                "type": "doc",
-                                "id": "learn/bitesize-introduction"
-                            },
-                            {
-                                "type": "doc",
-                                "id": "learn/bitesize-invaders"
-                            },
-                            {
-                                "type": "doc",
-                                "id": "learn/bitesize-spaceshooter"
-                            }
-                        ]
-                    },
-                ],
-            },
-            {
-                "collapsed": true,
-                "type": "category",
-                "label": "Community Contributions",
-                "items": [
-                    {
-
-                        "collapsed": true,
-                        "type": "category",
-                        "label": "Dilmer Tutorials",
-                        "items": [
-                            {
-                                "type": "doc",
-                                "id": "learn/dilmer/dilmer-video"
-                            },
-                            {
-                                "type": "doc",
-                                "id": "learn/dilmer/project-setup"
-                            },
-                            {
-                                "type": "doc",
-                                "id": "learn/dilmer/corefeatures"
-                            },
-                            {
-                                "type": "doc",
-                                "id": "learn/dilmer/networkanimator"
-                            },
-                            {
-                                "type": "doc",
-                                "id": "learn/dilmer/relay-service-setup"
-                            }
-                        ]
+                        "type": "doc",
+                        "id": "reference/glossary/network-topologies"
                     },
                     {
-
-                        "collapsed": true,
-                        "type": "category",
-                        "label": "Dapper Tutorials",
-                        "items": [
-                            {
-                                "type": "doc",
-                                "id": "learn/dapper/dapper-video"
-                            },
-                            {
-                                "type": "doc",
-                                "id": "learn/dapper/dapper-upgrade"
-                            },
-
-                        ]
+                        "type": "doc",
+                        "id": "learn/listen-server-host-architecture"
                     }
-                ]
+                        ]
             },
-
             {
                 "type": "doc",
                 "id": "learn/faq"
             },
         ],
-
 
     api:
         [
@@ -684,6 +642,11 @@ module.exports = {
                     },
                     {
                         "type": "doc",
+                        "id": "api/Unity.Netcode.FastBufferWriter.ForFixedStrings",
+                        "label": "FastBufferWriter.ForFixedStrings"
+                    },
+                    {
+                        "type": "doc",
                         "id": "api/Unity.Netcode.FastBufferWriter.ForNetworkSerializable",
                         "label": "FastBufferWriter.ForNetworkSerializable"
                     },
@@ -709,23 +672,8 @@ module.exports = {
                     },
                     {
                         "type": "doc",
-                        "id": "api/Unity.Netcode.ForceNetworkSerializeByMemcpy",
-                        "label": "ForceNetworkSerializeByMemcpy"
-                    },
-                    {
-                        "type": "doc",
-                        "id": "api/Unity.Netcode.VariableSerialization-1",
-                        "label": "VariableSerialization-1"
-                    },
-                    {
-                        "type": "doc",
-                        "id": "api/Unity.Netcode.NetworkVariableSerialization-1.ReadDelegate-1",
-                        "label": "NetworkVariableSerialization-1.ReadDelegate-1"
-                    },
-                    {
-                        "type": "doc",
-                        "id": "api/Unity.Netcode.NetworkVariableSerialization-1.WriteDelegate-1",
-                        "label": "NetworkVariableSerialization-1.WriteDelegate-1"
+                        "id": "api/Unity.Netcode.ForceNetworkSerializeByMemcpy-1",
+                        "label": "ForceNetworkSerializeByMemcpy-1"
                     },
                     {
                         "type": "doc",
@@ -940,9 +888,14 @@ module.exports = {
                     },
                     {
                         "type": "doc",
-                        "id": "api/Unity.Netcode.NetworkManager.ConnectionApprovedDelegate",
-                        "label": "ConnectionApprovedDelegate"
-                    }
+                        "id": "api/Unity.Netcode.NetworkManager.ConnectionApprovalRequest",
+                        "label": "ConnectionApprovalRequest"
+                    },
+                    {
+                        "type": "doc",
+                        "id": "api/Unity.Netcode.NetworkManager.ConnectionApprovalResponse",
+                        "label": "ConnectionApprovalResponse"
+                    },
                 ]
             },
             {
@@ -958,11 +911,6 @@ module.exports = {
                     },
                     {
                         "type": "doc",
-                        "id": "api/Unity.Netcode.NetworkVariableHelper",
-                        "label": "NetworkVariableHelper"
-                    },
-                    {
-                        "type": "doc",
                         "id": "api/Unity.Netcode.NetworkVariable-1",
                         "label": "NetworkVariable-1"
                     },
@@ -975,6 +923,11 @@ module.exports = {
                         "type": "doc",
                         "id": "api/Unity.Netcode.NetworkVariableReadPermission",
                         "label": "NetworkVariableReadPermission"
+                    },
+                    {
+                        "type": "doc",
+                        "id": "api/Unity.Netcode.UserNetworkVariableSerialization-1",
+                        "label": "UserNetworkVariableSerialization-1"
                     },
                 ],
             },

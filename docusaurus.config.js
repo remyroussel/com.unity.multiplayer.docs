@@ -118,13 +118,13 @@ module.exports = {
                 },
                 {
                     to: 'about',
-                    label: 'Netcode Tools',
+                    label: 'Multiplayer Tools',
                     position: 'left',
                     docsPluginId: 'tools',
                     className: 'nav-break',
                     items: [
                         {
-                            to: '/tools/tools-1-0-0-pre',
+                            to: '/tools/tools-1-0-0',
                             label: 'Release Notes',
                             docsPluginId: 'releases'
                         },
@@ -133,12 +133,11 @@ module.exports = {
                             label: 'Documentation',
                             docsPluginId: 'tools',
                         },
-/*/
                         {
                             to: 'api/introduction',
                             label: 'API Reference',
                             docsPluginId: 'tools',
-                        }, /*/
+                        },
                     ]
                 },
                 {
@@ -149,8 +148,8 @@ module.exports = {
                     docsPluginId: 'tools'
                 },
                 {
-                    to: '/learn/introduction',
-                    label: 'Education Resources',
+                    to: 'reference/glossary/high-level-terminology',
+                    label: 'Concepts and FAQs',
                     className: 'nav-break',
                     position: 'left',
                 },
@@ -300,10 +299,6 @@ module.exports = {
                 {
                     title: 'Contact',
                     items: [
-                        {
-                            label: 'Unity Blog',
-                            href: 'https://blogs.unity3d.com/',
-                        },
                         {
                             label: 'Unity Multiplayer Forum',
                             href: 'https://forum.unity.com/forums/multiplayer.26/',
@@ -619,7 +614,7 @@ module.exports = {
           {
             redirects: [
               {
-                to: '/netcode/current/learn/bossroom',
+                to: '/netcode/current/learn/bossroom/bossroom',
                 from: '/docs/learn/bossroom/index.html',
               },
             ]

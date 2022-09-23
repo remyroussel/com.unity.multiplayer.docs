@@ -14,7 +14,7 @@ The `NetworkManager` is a required **Netcode for GameObjects (Netcode)** compone
 - **Network Transport**: Where your network specific settings and transport type is set.  This field accepts any INetworkTransport implementation.  However, unless you have unique transport specific needs UnityTransport is the recommended transport to use with Netcode for GameObjects.
 - **Tick Rate**: This value controls the network tick update rate.
 - **Ensure Network Variable Length Safety**: (Increases cpu processing and bandwidth) When this property is checked, Netcode for GameObjects will prevent user code from writing past the boundaries of a NetworkVariable.
-- **Connection Approval**: This enables [connection approval](../getting-started/connection-approval.md) when this is checked and the `NetworkManager.ConnectionApprovalCallback` is assigned.
+- **Connection Approval**: This enables [connection approval](../basics/connection-approval.md) when this is checked and the `NetworkManager.ConnectionApprovalCallback` is assigned.
 - **Client Connection Buffer Timeout**: This value sets the amount of time that has to pass for a connecting client to complete the connection approval process.  If the time specified is exceeded the connecting client will be disconnected.
 - **Force Same Prefabs**: When checked it will always verify that connecting clients have the same registered network prefabs as the server.  When not checked, Netcode for GameObjects will ignore any differences.
 - **Recycle Network Ids**: When checked this will re-use previously assigned `NetworkObject.NetworkObjectIds` after the specified period of time.
@@ -26,11 +26,11 @@ The `NetworkManager` is a required **Netcode for GameObjects (Netcode)** compone
 `NetworkManager` is also where you can find references to other Netcode related management systems:<br/>
 
 :::caution
-All `NetworkManager` sub-systems are instantiated once the `NetworkManager` is started (i.e. NetworkManager.IsListening == true).  A good general "rule of thumb" is to not attempt to access the below sub-systems prior to starting the `NetworkManager`, otherwise they will not yet be initialized.
+All `NetworkManager` sub-systems are instantiated once the `NetworkManager` is started (i.e. `NetworkManager.IsListening == true`).  A good general "rule of thumb" is to not attempt to access the below sub-systems prior to starting the `NetworkManager`, otherwise they will not yet be initialized.
 :::
 
 - [NetworkManager.PrefabHandler](../advanced-topics/object-pooling.md): This provides access to the NetworkPrefabHandler that is used for NetworkObject pools and to have more control overriding network prefabs.
-- [NetworkManager.SceneManager](../basics/scene-management.md): When scene management is enabled, this is used to load and unload scenes, register for scene events, and other scene management related actions.
+- [NetworkManager.SceneManager](../basics/scenemanagement/using-networkscenemanager.md): When scene management is enabled, this is used to load and unload scenes, register for scene events, and other scene management related actions.
 - [NetworkManager.SpawnManager](../basics/object-spawning.md): This handles NetworkObject spawn related functionality.
 - [NetworkManager.NetworkTimeSystem](../advanced-topics/networktime-ticks.md): a synchronized time that can be used to handle issues with latency between a client and the server.
 - [NetworkManager.NetworkTickSystem](../advanced-topics/networktime-ticks#network-ticks.md): Use this to adjust the frequency of when NetworkVariables are updated.
@@ -55,19 +55,40 @@ Do not start a NetworkManager within a NetworkBehaviour's Awake method as this c
 
  For more information about player prefabs see:
  - [NetworkObject Player Prefab Documentation](../basics/networkobject.md#player-objects)
- - [Connection Approval](../getting-started/connection-approval.md)  
+ - [Connection Approval](../basics/connection-approval)  
 :::
 
 ## Connecting
 
 When Starting a Client, the `NetworkManager` uses the IP and the Port provided in your `Transport` component for connecting. While you can set the IP address in the editor, many times you might want to be able to set the IP address and port during runtime.
 
-If you are using [Unity Transport](../../transport/about.md) it would look like this:
+The below examples use [Unity Transport](../../../transport/current/about) to demonstrate a few ways you can gain access to the `UnityTransport` component via the `NetworkManager.Singleton` in order to configure your project's network settings programmatically: 
 
+If you are only setting the IP address and port number, then you can use the `UnityTransport.SetConnectionData` method:
 ```csharp
-NetworkManager.Singleton.GetComponent<UnityTransport>().ConnectionData.Address = "127.0.0.1"; //takes string
-NetworkManager.Singleton.GetComponent<UnityTransport>().ConnectionDat.Port = 12345;           //takes integer
+NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(
+    "127.0.0.1",  // The IP address is a string
+    (ushort)12345 // The port number is an unsigned short
+);
 ```
+
+If you are using the same code block to configure both your server and your client and you want to configure your server to listen to all IP addresses assigned to it, then you can also pass a 'listen address' of "0.0.0.0" to the `SetConnectionData` method, like so:
+```csharp
+NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(
+    "127.0.0.1",  // The IP address is a string
+    (ushort)12345, // The port number is an unsigned short
+    "0.0.0.0" // The server listen address is a string.
+);
+```
+
+:::note
+Using an IP address of 0.0.0.0 for the server listen address will make a server or host listen on all IP addresses assigned to the local system. This can be particularly helpful if you are testing a client instance on the same system as well as one or more client instances connecting from other systems on your local area network. Another scenario is while developing and debugging you might sometimes test local client instances on the same system and sometimes test client instances running on external systems.  
+:::
+
+It is possible to access the current connection data at runtime, via `NetworkManager.Singleton.GetComponent<UnityTransport>().ConnectionData`. This will return a [`ConnectionAddressData` **struct**](https://github.com/Unity-Technologies/com.unity.netcode.gameobjects/blob/11922a0bc100a1615c541aa7298c47d253b74937/com.unity.netcode.gameobjects/Runtime/Transports/UTP/UnityTransport.cs#L239-L286), holding this info. You are strongly advised to use the `SetConnectionData` method to update this info.
+
+If you are using Unity Relay to handle connections, however, **do not use `SetConnectionData`**. The host should call [`SetHostRelayData`](https://github.com/Unity-Technologies/com.unity.netcode.gameobjects/blob/11922a0bc100a1615c541aa7298c47d253b74937/com.unity.netcode.gameobjects/Runtime/Transports/UTP/UnityTransport.cs#L575), and clients should call [`SetClientRelayData`](https://github.com/Unity-Technologies/com.unity.netcode.gameobjects/blob/11922a0bc100a1615c541aa7298c47d253b74937/com.unity.netcode.gameobjects/Runtime/Transports/UTP/UnityTransport.cs#L588). Attempting to join a **Relay**-hosted game via entering IP/port number (via `SetConnectionData`) **will not work**.
+
 
 [More information about Netcode for GameObjects Transports](../advanced-topics/transports.md)
 
@@ -103,7 +124,8 @@ One way to get a player's primary `NetworkObject` is via `NetworkClient.PlayerOb
 
 ```csharp
 void DisconnectPlayer(NetworkObject player)
-{    
+{   
+    // Note: If a client invokes this method, it will throw an exception.
     NetworkManager.DisconnectClient(player.OwnerClientId);
 }
 ```
@@ -129,8 +151,12 @@ Both the client and the server can subscribe to the `NetworkManger.OnClientDisco
   - _Reason: The client already knows that it is disconnected._
 
 ### Connection Notification Manager Example
-Below is one example of how you could provide client connect and disconnect notifications to any
-type of NetworkBehaviour or MonoBehaviour derived component.
+Below is one example of how you could provide client connect and disconnect notifications to any type of NetworkBehaviour or MonoBehaviour derived component. 
+
+:::important
+The `ConnectionNotificationManager` example below should only be attached to the same GameObject as `NetworkManager` to assure it persists as long as the `NetworkManager.Singleton` instance.
+:::
+
 
 ```csharp
 using System;
@@ -138,10 +164,9 @@ using UnityEngine;
 using Unity.Netcode;
 
 /// <summary>
-/// This could be attached to the NetworkManager GameObject and
-/// provides you with a single location that anything (netcode
-/// aware or not) can be notified when a client is connected and
-/// when the client is disconnected.
+/// Only attach this example component to the NetworkManager GameObject.
+/// This will provide you with a single location to register for client 
+/// connect and disconnect events.  
 /// </summary>
 public class ConnectionNotificationManager : MonoBehaviour
 {
@@ -153,12 +178,19 @@ public class ConnectionNotificationManager : MonoBehaviour
         Disconnected
     }
 
+    /// <summary>
+    /// This action is invoked whenever a client connects or disconnects from the game.
+    ///   The first parameter is the ID of the client (ulong).
+    ///   The second parameter is whether or not that client is connecting or disconnecting.
+    /// </summary>
     public event Action<ulong, ConnectionStatus> OnClientConnectionNotification;
 
     private void Awake()
     {
         if (Singleton != null)
         {
+            // As long as you aren't creating multiple NetworkManager instances, throw an exception.
+            // (***the current position of the callstack will stop here***)
             throw new Exception($"Detected more than one instance of {nameof(ConnectionNotificationManager)}! " +
                 $"Do you have more than one component attached to a {nameof(GameObject)}");
         }
@@ -167,18 +199,30 @@ public class ConnectionNotificationManager : MonoBehaviour
 
     private void Start()
     {
+        if (Singleton != this){
+            return; // so things don't get even more broken if this is a duplicate >:(
+        }
+        
+        if (NetworkManager.Singleton == null)
+        {
+            // Can't listen to something that doesn't exist >:(
+            throw new Exception($"There is no {nameof(NetworkManager)} for the {nameof(ConnectionNotificationManager)} to do stuff with! " + 
+                $"Please add a {nameof(NetworkManager)} to the scene.");
+        }
+        
         NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallback;
         NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnectCallback;
     }
 
     private void OnDestroy()
     {
-        // As long as you attach this to the NetworkManager GameObject,
-        // you need not worry about removing your subscription from the
-        // NetworkManager connected disconnected events since when this
-        // is getting destroyed the NetworkManager itself is getting
-        // destroyed.
-        Singleton = null;
+        // Since the NetworkManager could potentially be destroyed before this component, only 
+        // remove the subscriptions if that singleton still exists.
+        if (NetworkManager.Singleton != null)
+        {
+            NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnectedCallback;
+            NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnectCallback;
+        }
     }
 
     private void OnClientConnectedCallback(ulong clientId)
