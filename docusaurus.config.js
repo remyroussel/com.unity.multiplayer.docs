@@ -486,12 +486,6 @@ module.exports = {
       },
     ],
     [
-      require.resolve("docusaurus-gtm-plugin"),
-      {
-        id: "GTM-5V25JL6", // GTM Container ID
-      },
-    ],
-    [
       "@docusaurus/plugin-client-redirects",
       {
         redirects: [
